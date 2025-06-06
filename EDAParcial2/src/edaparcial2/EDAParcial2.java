@@ -3,12 +3,15 @@ package edaparcial2;
 import java.util.Scanner;
 
 public class EDAParcial2 {
-    
+
     public static void main(String[] args) {
-        Arbol a = new Arbol();
-         
+        Arbol Arbol = new Arbol();
+        DiscursoAnalisis Discurso = new DiscursoAnalisis();
+
         String opcion;
-        Scanner leer=new Scanner (System.in);
+        String texto = null;
+        String[] palabras = {};
+        Scanner leer = new Scanner(System.in);
 
         do {
             System.out.println("\n--- Menú de Análisis de Discurso ---");
@@ -18,55 +21,44 @@ public class EDAParcial2 {
             System.out.println("4. Saber cuántas palabras negativas o poco inteligentes se usan");
             System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = leer.nextLine();
+            opcion = leer.nextLine().trim();
 
-            switch (opcion) {
-                case "1":
-                    //ingresarTexto();
-                    break;
-                case "2":
-                    //saberCantidadPalabrasUsadas();
-                    break;
-                case "3":
-                    //saberPalabraMasRepetida();
-                    break;
-                case "4":
-                    //saberCuantasPalabrasNegativasSeUsan();
-                    break;        
-                case "5":
-                    System.out.println("Saliendo de la aplicación");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Por favor, intente de nuevo.");
+            if ((texto == null || texto.isEmpty()) && !opcion.equals("1") && !opcion.equals("5")) {
+                System.out.println("No hay discurso. Por favor ingrese el discurso para usar las demas opciones.");
+            } else {
+
+                switch (opcion) {
+
+                    case "1":
+                        System.out.println("Ingresa el discurso: ");
+                        texto = leer.nextLine();
+                         palabras = Discurso.DividirTexto(texto);
+                        for (String palabra : palabras) {
+                            Arbol.insertar(palabra);
+                        }
+                        System.out.println("Discurso ingresado con exito.");
+                        break;
+
+                    case "2":
+                        System.out.println("Cantidad de palabras usadas: "+ palabras.length);
+                        break;
+                        
+                    case "3":
+                        //saberPalabraMasRepetida();
+                        break;
+                    case "4":
+                        //saberCuantasPalabrasNegativasSeUsan();
+                        break;
+                    case "5":
+                        System.out.println("Saliendo de la aplicación");
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                }
             }
+
         } while (!opcion.equals("5"));
         leer.close();
-    
-//        a.insertar("Pancreas");
-//        a.insertar("Las");
-//        a.insertar("La");
-//        a.insertar("Pancreas");
-//        a.insertar("Oscilacion");
-//        a.insertar("Aracnido");
-//        a.insertar("Bulgaria");
-//        a.insertar("Petrificado");
-//        
-        a.inOrden();
-        
-        DiscursoAnalisis d = new DiscursoAnalisis();
-        
-        String texto = "Área hola que onda esto es un texto para probar el metodo de dividir palabras dentro de un discurso";
-        
-        String[]arroba = d.DividirTexto(texto);
-        
-        for (int i = 0; i < arroba.length; i++) {
-            a.insertar(arroba[i]);
-        }
-        
-        a.inOrden();
-        
-       
-    }
-    
 
+    }
 }
