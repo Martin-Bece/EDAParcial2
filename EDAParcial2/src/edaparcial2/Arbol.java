@@ -51,4 +51,17 @@ class Arbol {
             inOrdenAux(nodo.der, list);
         }
     }
+
+    public Nodo getRaiz() {
+        return raiz;
+    }
+
+    public void setRaiz(Nodo raiz) {
+        this.raiz = raiz;
+    }
+    
+    public void vaciar() {
+    raiz = null;
+    }
+
 }

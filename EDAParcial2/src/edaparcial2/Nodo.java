@@ -2,7 +2,7 @@ package edaparcial2;
 
 public class Nodo {
     String palabra;
-    int contador;
+    int contador = 1;
     Nodo izq, der;
     
     public Nodo(String palabra){

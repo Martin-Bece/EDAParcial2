@@ -1,5 +1,7 @@
 package edaparcial2;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class EDAParcial2 {
@@ -9,9 +11,28 @@ public class EDAParcial2 {
         DiscursoAnalisis Discurso = new DiscursoAnalisis();
 
         String opcion;
+        boolean flag = false;
         String texto = null;
         String[] palabras = {};
         Scanner leer = new Scanner(System.in);
+
+        List<String> palabrasInteligentes = Arrays.asList(
+                "preciso", "variado", "lógico", "creativo", "efímero", "inefable", "serendipia",
+                "melifluo", "ataraxia", "perdurable", "inmenso", "extraordinario", "feliz", "optimista",
+                "exitoso", "brillante", "acendrado", "alba", "epifanía", "nostal", "ineludible",
+                "perspicaz", "inequívoco", "meticuloso", "disruptivo", "convergencia", "inherente",
+                "pragmático", "ambiguo"
+        );
+
+        List<String> palabrasNegativas = Arrays.asList(
+                "realmente", "literalmente", "siempre", "cosa", "fui", "súper", "re", "muy", "nada",
+                "todo", "coso", "onda", "tipo", "así", "mal", "bien", "groso", "nivel", "posta", "viste"
+        );
+
+        List<String> monosilabas = Arrays.asList(
+                "el", "la", "lo", "en", "de", "y", "o", "a", "es", "un", "yo", "tu", "mi", "me", "te", "si",
+                "no", "ni", "ya", "fue", "sol", "pan", "que", "con", "del"
+        );
 
         do {
             System.out.println("\n--- Menú de Análisis de Discurso ---");
@@ -30,24 +51,26 @@ public class EDAParcial2 {
                 switch (opcion) {
 
                     case "1":
+                        Arbol.vaciar();
                         System.out.println("Ingresa el discurso: ");
                         texto = leer.nextLine();
-                         palabras = Discurso.DividirTexto(texto);
+                        palabras = Discurso.DividirTexto(texto);
                         for (String palabra : palabras) {
                             Arbol.insertar(palabra);
                         }
                         System.out.println("Discurso ingresado con exito.");
+                        Arbol.inOrden();
                         break;
 
                     case "2":
-                        System.out.println("Cantidad de palabras usadas: "+ palabras.length);
+                        System.out.println("Cantidad de palabras usadas: " + palabras.length);
                         break;
-                        
+
                     case "3":
-                        //saberPalabraMasRepetida();
+                        Discurso.SaberPalabraMasRepetida(Arbol, monosilabas);
                         break;
                     case "4":
-                        //saberCuantasPalabrasNegativasSeUsan();
+                        Discurso.saberCuantasPalabrasNegativasYPositivasSeUsan(Arbol, palabrasInteligentes, palabrasNegativas);
                         break;
                     case "5":
                         System.out.println("Saliendo de la aplicación");
