@@ -40,11 +40,12 @@ public class EDAParcial2 {
             System.out.println("2. Saber la cantidad de palabras usadas");
             System.out.println("3. Saber la palabra que más se repite (omitiendo artículos y monosílabos)");
             System.out.println("4. Saber cuántas palabras negativas o poco inteligentes se usan");
-            System.out.println("5. Salir");
+            System.out.println("5. Mostrar palabras que componen el discurso");
+            System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = leer.nextLine().trim();
 
-            if ((texto == null || texto.isEmpty()) && !opcion.equals("1") && !opcion.equals("5")) {
+            if ((texto == null || texto.isEmpty()) && !opcion.equals("1") && !opcion.equals("6")) {
                 System.out.println("No hay discurso. Por favor ingrese el discurso para usar las demas opciones.");
             } else {
 
@@ -59,7 +60,6 @@ public class EDAParcial2 {
                             Arbol.insertar(palabra);
                         }
                         System.out.println("Discurso ingresado con exito.");
-                        Arbol.inOrden();
                         break;
 
                     case "2":
@@ -73,6 +73,9 @@ public class EDAParcial2 {
                         Discurso.saberCuantasPalabrasNegativasYPositivasSeUsan(Arbol, palabrasInteligentes, palabrasNegativas);
                         break;
                     case "5":
+                        Arbol.inOrden();
+                        break;
+                    case "6":
                         System.out.println("Saliendo de la aplicación");
                         break;
                     default:
@@ -80,7 +83,7 @@ public class EDAParcial2 {
                 }
             }
 
-        } while (!opcion.equals("5"));
+        } while (!opcion.equals("6"));
         leer.close();
 
     }
