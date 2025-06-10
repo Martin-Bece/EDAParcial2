@@ -24,7 +24,7 @@ public class DiscursoAnalisis {
 
         buscarMasRepetida(arbol.getRaiz(), monosilabas);
 
-        if (!palabraMasRepetida.equals("")) {
+        if (!palabraMasRepetida.equals("") && maxContador > 1) {
             System.out.println("La palabra más repetida es: \"" + palabraMasRepetida + "\" con " + (maxContador) + " repeticiones.");
         } else {
             System.out.println("No hay palabra más repetida (Hay mas de 1 palabra con repeticiones maximas o solo se ingresaron monosilabos).");
